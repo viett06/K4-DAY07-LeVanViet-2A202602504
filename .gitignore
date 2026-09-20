@@ -7,6 +7,9 @@ __pycache__/
 # Environment
 .env
 .env.local
+.embedding_cache/
+data/ecommerce/.embedding_cache.json
+data/ecommerce/.embedding_cache_gemini.json
 
 # OS
 .DS_Store

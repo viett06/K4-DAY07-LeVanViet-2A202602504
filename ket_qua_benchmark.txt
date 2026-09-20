@@ -1,0 +1,94 @@
+=== KẾT QUẢ ĐO LƯỜNG BENCHMARK (FixedSizeChunker (size=400, overlap=50)) ===
+Tổng số tài liệu: 5 file .md | Tổng số chunks: 373
+Độ dài chunk: trung bình=397.9 ký tự | lớn nhất=400 ký tự
+Mô hình embedding: gemini-embedding-001 (có cache disk)
+
+--- [Câu hỏi 1] Người mua có thể gửi yêu cầu trả hàng hoàn tiền trong thời hạn bao lâu sau khi nhận hàng? ---
+Ghi chú: Truy xuất thời hạn người mua yêu cầu trả hàng
+Áp dụng Metadata Filter: Không (None)
+  Top-1 [Score: 0.8138] (shopee-return-refund-buyer):  tự thỏa thuận và đồng ý cho Người Mua trả hàng (tuy nhiên Shopee sẽ cần Người Bán xác nhận lại những thỏa thu...
+  Top-2 [Score: 0.7939] (shopee-return-refund-buyer): hoặc hoàn tiền từ phía Người Mua, Shopee sẽ xem xét và quyết định cho Người Mua được trả hàng/hoàn tiền, đồng ...
+  Top-3 [Score: 0.7908] (shopee-return-refund-buyer): đơn hàng được cập nhật giao hàng thành công. Riêng đối với các Sản Phẩm là thực phẩm tươi sống và đông lạnh, N...
+  => Gold Answer : Trong vòng 15 ngày kể từ lúc đơn hàng được cập nhật giao hàng thành công (riêng thực phẩm tươi sống và đông lạnh là trong vòng 24 giờ).
+  => Agent Answer: [RAG Agent Answer] Phản hồi dựa trên ngữ cảnh: Bạn là trợ lý chỉ được trả lời dựa trên ngữ cảnh được cung cấp. Không suy đoán thông tin ngoài ngữ cảnh. Nếu ngữ cảnh không đủ để trả lời, hãy nói rõ là không tìm thấy. Khi trả lời, trích dẫn số nguồn [1], [2], ... tương ứng với chunk đã dùng.
+
+Ngữ c...
+  => Gold rank: 1 | Agent facts: thiếu | Citation: có
+  => Đánh giá: 1/2 - Chunk đúng ở Top-2/3 hoặc Agent trả lời/trích dẫn chưa đầy đủ
+
+--- [Câu hỏi 2] Thời hạn xử lý và phản hồi khiếu nại yêu cầu trả hàng hoàn tiền của Người Bán là bao lâu? ---
+Ghi chú: Câu A/B Filter: Lọc audience='seller' để phân biệt với thời hạn 15 ngày của Người mua
+Áp dụng Metadata Filter: {'audience': 'seller'}
+  Top-1 [Score: 0.7057] (shopee-seller-listing-rules): yển khi có đơn hàng phát sinh. Mọi trường hợp Người Mua nhận được sản phẩm thực phẩm đã hết hạn sử dụng do Ngư...
+  Top-2 [Score: 0.7035] (shopee-seller-listing-rules): phản ánh đúng kỳ vọng Người mua. Trong trường hợp Người bán bị nhiều Người mua tố cáo, đánh giá tiêu cực về ch...
+  Top-3 [Score: 0.6988] (shopee-antifraud-seller-penalty): iện pháp sau đối với Người Bán Vi Phạm:  (i) Gửi thông tin cảnh báo vi phạm tới tài khoản Người Bán Vi Phạm;  ...
+  => Gold Answer : Người Bán cần gửi phản hồi trong vòng 02 ngày lịch kể từ ngày nhận được thông báo của Shopee nếu không đồng ý với quyết định hoàn tiền.
+  => Agent Answer: [RAG Agent Answer] Phản hồi dựa trên ngữ cảnh: Bạn là trợ lý chỉ được trả lời dựa trên ngữ cảnh được cung cấp. Không suy đoán thông tin ngoài ngữ cảnh. Nếu ngữ cảnh không đủ để trả lời, hãy nói rõ là không tìm thấy. Khi trả lời, trích dẫn số nguồn [1], [2], ... tương ứng với chunk đã dùng.
+
+Ngữ c...
+  => Gold rank: không có trong Top-3 | Agent facts: thiếu | Citation: có
+  => Đánh giá: 0/2 - Không có chunk đúng chứa key fact trong Top-3
+
+--- [Câu hỏi 3] Người bán có hành vi gian lận tạo đơn hàng ảo trên Shopee bị xử phạt bồi thường bao nhiêu tiền cho mỗi đơn hàng vi phạm? ---
+Ghi chú: Mức phạt bồi thường vi phạm gian lận đơn ảo
+Áp dụng Metadata Filter: {'audience': 'seller'}
+  Top-1 [Score: 0.8306] (shopee-antifraud-seller-penalty): ính Sách;  (viii) Áp dụng các hành động hoặc biện pháp chế tài khác theo Tiêu Chuẩn Cộng Đồng, Quy Chế Hoạt Độ...
+  Top-2 [Score: 0.8026] (shopee-antifraud-seller-penalty): ây.     1. Hành Vi Gian Lận Trên Sàn Shopee  Người Bán được xem là có hành vi gian lận đối với hoạt động bán h...
+  Top-3 [Score: 0.7873] (shopee-antifraud-seller-penalty):  gìn và đảm bảo một nền tảng mua bán minh bạch, an toàn, thân thiện và tích cực, nhằm bảo vệ tối đa quyền lợi ...
+  => Gold Answer : Người Bán sẽ phải bồi thường cho Shopee một khoản tiền lên đến 10.000.000 VND (Mười triệu đồng) cho từng đơn hàng vi phạm Chính Sách, được cấn trừ vào Số dư Tài Khoản Shopee.
+  => Agent Answer: [RAG Agent Answer] Phản hồi dựa trên ngữ cảnh: Bạn là trợ lý chỉ được trả lời dựa trên ngữ cảnh được cung cấp. Không suy đoán thông tin ngoài ngữ cảnh. Nếu ngữ cảnh không đủ để trả lời, hãy nói rõ là không tìm thấy. Khi trả lời, trích dẫn số nguồn [1], [2], ... tương ứng với chunk đã dùng.
+
+Ngữ c...
+  => Gold rank: 1 | Agent facts: thiếu | Citation: có
+  => Đánh giá: 1/2 - Chunk đúng ở Top-2/3 hoặc Agent trả lời/trích dẫn chưa đầy đủ
+
+--- [Câu hỏi 4] Quy định về hạn sử dụng của hàng hóa khi Người Bán giao đi trên Shopee phải còn lại ít nhất bao nhiêu? ---
+Ghi chú: Quy định về hạn sử dụng hàng hóa khi đăng bán
+Áp dụng Metadata Filter: Không (None)
+  Top-1 [Score: 0.8286] (shopee-seller-listing-rules): yển khi có đơn hàng phát sinh. Mọi trường hợp Người Mua nhận được sản phẩm thực phẩm đã hết hạn sử dụng do Ngư...
+  Top-2 [Score: 0.8250] (shopee-seller-listing-rules): g của sản phẩm chính  a. Người Bán chỉ được phép bán các loại hàng hóa mà khi giao đi phải còn ít nhất 30% thờ...
+  Top-3 [Score: 0.7914] (shopee-seller-listing-rules): hết hạn là ngày 1 của tháng đó.Hạn sử dụng của sản phẩm được ghi dưới dạng "hạn sử dụng: tháng/năm" sẽ được hi...
+  => Gold Answer : Hàng hóa khi giao đi phải còn ít nhất 30% thời hạn sử dụng và còn ít nhất 30 ngày, tính từ thời điểm hiện tại đến ngày hết hạn.
+  => Agent Answer: [RAG Agent Answer] Phản hồi dựa trên ngữ cảnh: Bạn là trợ lý chỉ được trả lời dựa trên ngữ cảnh được cung cấp. Không suy đoán thông tin ngoài ngữ cảnh. Nếu ngữ cảnh không đủ để trả lời, hãy nói rõ là không tìm thấy. Khi trả lời, trích dẫn số nguồn [1], [2], ... tương ứng với chunk đã dùng.
+
+Ngữ c...
+  => Gold rank: 2 | Agent facts: thiếu | Citation: có
+  => Đánh giá: 1/2 - Chunk đúng ở Top-2/3 hoặc Agent trả lời/trích dẫn chưa đầy đủ
+
+--- [Câu hỏi 5] Sản phẩm mua trên Shopee được bảo hành miễn phí khi đáp ứng những điều kiện nào? ---
+Ghi chú: Điều kiện bảo hành sản phẩm Shopee
+Áp dụng Metadata Filter: {'audience': 'buyer'}
+  Top-1 [Score: 0.8529] (shopee-warranty-buyer): # Chính sách bảo hành cho sản phẩm mua tại Shopee  [Quy định] Chính sách bảo hành cho sản phẩm mua tại Shopee ...
+  Top-2 [Score: 0.8328] (shopee-warranty-buyer):  hàng chính hãng nên Shopee khuyến khích quý khách gửi sản phẩm trực tiếp đến địa chỉ bảo hành được đề cập tro...
+  Top-3 [Score: 0.8291] (shopee-warranty-buyer):      Trong trường hợp quý khách gặp khó khăn trong việc liên hệ trung tâm bảo hành, ở quá xa trung tâm bảo hàn...
+  => Gold Answer : Sản phẩm bị lỗi kỹ thuật do nhà sản xuất, còn trong thời hạn bảo hành, có hóa đơn điện tử hoặc mã đơn hàng (ID đơn hàng), phiếu/tem bảo hành của nhà sản xuất còn nguyên vẹn.
+  => Agent Answer: [RAG Agent Answer] Phản hồi dựa trên ngữ cảnh: Bạn là trợ lý chỉ được trả lời dựa trên ngữ cảnh được cung cấp. Không suy đoán thông tin ngoài ngữ cảnh. Nếu ngữ cảnh không đủ để trả lời, hãy nói rõ là không tìm thấy. Khi trả lời, trích dẫn số nguồn [1], [2], ... tương ứng với chunk đã dùng.
+
+Ngữ c...
+  => Gold rank: không có trong Top-3 | Agent facts: thiếu | Citation: có
+  => Đánh giá: 0/2 - Không có chunk đúng chứa key fact trong Top-3
+
+=================================================================
+               A/B TESTING METADATA FILTER (CÂU 2)               
+=================================================================
+Câu hỏi: Thời hạn xử lý và phản hồi khiếu nại yêu cầu trả hàng hoàn tiền của Người Bán là bao lâu?
+
+[LẦN 1 - KHÔNG LỌC METADATA (Unfiltered)]:
+  Top-1 [Audience: buyer | Score: 0.8403]: hoặc hoàn tiền từ phía Người Mua, Shopee sẽ xem xét và quyết định cho Người Mua được trả hàng/hoàn tiền, đồng ...
+  Top-2 [Audience: both | Score: 0.7823]: oàn Tiền được xử lý theo Chính Sách Trả Hàng Và Hoàn Tiền của Shopee. Đối với các tranh chấp không phải là khi...
+  Top-3 [Audience: buyer | Score: 0.7796]: ời Bán không phản hồi trong khoảng thời gian đã được quy định trước.  Để biết thêm thông tin về thời hạn phản ...
+
+[LẦN 2 - CÓ LỌC METADATA {'audience': 'seller'} (Filtered)]:
+  Top-1 [Audience: seller | Score: 0.7057]: yển khi có đơn hàng phát sinh. Mọi trường hợp Người Mua nhận được sản phẩm thực phẩm đã hết hạn sử dụng do Ngư...
+  Top-2 [Audience: seller | Score: 0.7035]: phản ánh đúng kỳ vọng Người mua. Trong trường hợp Người bán bị nhiều Người mua tố cáo, đánh giá tiêu cực về ch...
+  Top-3 [Audience: seller | Score: 0.6988]: iện pháp sau đối với Người Bán Vi Phạm:  (i) Gửi thông tin cảnh báo vi phạm tới tài khoản Người Bán Vi Phạm;  ...
+
+=> KẾT LUẬN A/B TEST:
+- Khi không lọc: Kết quả có nguy cơ lẫn lộn với các văn bản của Người mua (thời hạn 15 ngày), làm nhiễu thông tin phản hồi của người bán.
+- Khi có lọc {'audience': 'seller'}: Loại bỏ 100% tài liệu người mua, tập trung chính xác vào quy định phản hồi trong vòng 02 ngày lịch của Người bán.
+
+=== TỔNG KẾT ĐÁNH GIÁ ===
+Điểm Retrieval Quality: 3/10
+Hit@1: 2/5 = 40.00%
+Hit@3: 3/5 = 60.00%
+MRR: 0.5000
